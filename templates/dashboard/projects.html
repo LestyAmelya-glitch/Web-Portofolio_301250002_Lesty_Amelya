@@ -27,7 +27,7 @@
                 <td>{{ project.title }}</td>
                 <td>{{ project.technologies }}</td>
                 <td>
-                    <a href="#">Edit</a> |
+<a href="{{ url_for('edit_project', id=project.id) }}">Edit</a> |
                     <a href="#">Hapus</a>
                 </td>
             </tr>
