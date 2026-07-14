@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kelola Proyek</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Kelola Proyek</h1>
+    <p><a href="{{ url_for('dashboard_index') }}">← Kembali ke Dashboard</a></p>
+
+    <a href="#">+ Tambah Proyek Baru</a>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Judul</th>
+                <th>Teknologi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ project.title }}</td>
+                <td>{{ project.technologies }}</td>
+                <td>
+                    <a href="#">Edit</a> |
+                    <a href="#">Hapus</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Belum ada proyek.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

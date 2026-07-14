@@ -71,6 +71,14 @@ def dashboard_index():
 
     return render_template('dashboard/index.html', total_projects=total_projects, unread_messages=unread_messages)
 
+@app.route('/dashboard/projects')
+def dashboard_projects():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    projects = Project.query.all()
+    return render_template('dashboard/projects.html', projects=projects)
+
 @app.route('/dashboard/logout')
 def logout():
     session.pop('user', None)
