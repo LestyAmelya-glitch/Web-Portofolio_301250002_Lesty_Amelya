@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from models import db, Project, Message, Profile, Skill
+from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
@@ -7,8 +8,15 @@ app.config['ADMIN_USERNAME'] = 'admin'
 app.config['ADMIN_PASSWORD'] = 'admin123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
 app.config['SECRET_KEY'] = 'kunci-rahasia-anda-ganti-nanti'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5 MB
 
 db.init_app(app)
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def home():
@@ -78,6 +86,39 @@ def dashboard_projects():
 
     projects = Project.query.all()
     return render_template('dashboard/projects.html', projects=projects)
+
+@app.route('/dashboard/projects/add', methods=['GET', 'POST'])
+def add_project():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        technologies = request.form.get('technologies')
+        github_link = request.form.get('github_link')
+        live_link = request.form.get('live_link')
+        file = request.files.get('image')
+
+        image_filename = 'default.jpg'
+        if file and file.filename != '' and allowed_file(file.filename):
+            image_filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_filename))
+
+        new_project = Project(
+            title=title,
+            description=description,
+            technologies=technologies,
+            image_file=image_filename,
+            github_link=github_link,
+            live_link=live_link
+        )
+        db.session.add(new_project)
+        db.session.commit()
+
+        return redirect(url_for('dashboard_projects'))
+
+    return render_template('dashboard/add_project.html')
 
 @app.route('/dashboard/logout')
 def logout():

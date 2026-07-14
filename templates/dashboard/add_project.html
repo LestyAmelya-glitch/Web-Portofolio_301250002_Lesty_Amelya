@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Proyek</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Tambah Proyek Baru</h1>
+    <p><a href="{{ url_for('dashboard_projects') }}">← Kembali ke Kelola Proyek</a></p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label for="title">Judul Proyek:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Deskripsi:</label><br>
+        <textarea id="description" name="description" rows="4" required></textarea><br><br>
+
+        <label for="technologies">Teknologi (pisahkan dengan koma):</label><br>
+        <input type="text" id="technologies" name="technologies" placeholder="Python, Flask, SQLite"><br><br>
+
+        <label for="github_link">Link GitHub:</label><br>
+        <input type="url" id="github_link" name="github_link"><br><br>
+
+        <label for="live_link">Link Live Demo:</label><br>
+        <input type="url" id="live_link" name="live_link"><br><br>
+
+        <label for="image">Gambar Thumbnail:</label><br>
+        <input type="file" id="image" name="image" accept=".png,.jpg,.jpeg,.gif,.webp"><br><br>
+
+        <button type="submit">Simpan Proyek</button>
+    </form>
+</body>
+</html>
