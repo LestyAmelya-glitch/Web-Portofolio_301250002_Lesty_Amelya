@@ -156,6 +156,36 @@ def delete_project(id):
 
     return redirect(url_for('dashboard_projects'))
 
+@app.route('/dashboard/messages')
+def dashboard_messages():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    messages = Message.query.order_by(Message.created_at.desc()).all()
+    return render_template('dashboard/messages.html', messages=messages)
+
+@app.route('/dashboard/messages/read/<int:id>', methods=['POST'])
+def mark_read(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    message = Message.query.get_or_404(id)
+    message.is_read = True
+    db.session.commit()
+
+    return redirect(url_for('dashboard_messages'))
+
+@app.route('/dashboard/messages/delete/<int:id>', methods=['POST'])
+def delete_message(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    message = Message.query.get_or_404(id)
+    db.session.delete(message)
+    db.session.commit()
+
+    return redirect(url_for('dashboard_messages'))
+
 @app.route('/dashboard/logout')
 def logout():
     session.pop('user', None)

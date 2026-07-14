@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kotak Masuk Pesan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Kotak Masuk Pesan</h1>
+    <p><a href="{{ url_for('dashboard_index') }}">← Kembali ke Dashboard</a></p>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Pesan</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for msg in messages %}
+            <tr style="{{ 'font-weight: bold;' if not msg.is_read else '' }}">
+                <td>{{ 'Belum Dibaca' if not msg.is_read else 'Sudah Dibaca' }}</td>
+                <td>{{ msg.name }}</td>
+                <td>{{ msg.email }}</td>
+                <td>{{ msg.message }}</td>
+                <td>{{ msg.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+                <td>
+                    {% if not msg.is_read %}
+                    <form action="{{ url_for('mark_read', id=msg.id) }}" method="POST" style="display:inline;">
+                        <button type="submit">Tandai Dibaca</button>
+                    </form>
+                    {% endif %}
+                    <form action="{{ url_for('delete_message', id=msg.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus pesan ini?');">
+                        <button type="submit">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">Belum ada pesan masuk.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
