@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+<img src="{{ url_for('static', filename='uploads/' + project.image_file) }}" alt="{{ project.title }}" width="300">
+<h1>{{ project.title }}</h1>
+<p>{{ project.description }}</p>
+
+<h4>Teknologi:</h4>
+<p>{{ project.technologies }}</p>
+
+{% if project.github_link %}
+<a href="{{ project.github_link }}" target="_blank">Lihat di GitHub</a>
+{% endif %}
+
+{% if project.live_link %}
+<a href="{{ project.live_link }}" target="_blank">Lihat Live Demo</a>
+{% endif %}
+
+<br><br>
+<a href="/portofolio">← Kembali ke Portofolio</a>
+{% endblock %}
