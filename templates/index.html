@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" alt="Foto Profil" width="200">
+<h1>{{ profile.name }}</h1>
+<h3>{{ profile.headline }}</h3>
+<p>{{ profile.about }}</p>
+<a href="/portofolio">Lihat Portofolio</a>
+<a href="/kontak">Hubungi Saya</a>
+{% endblock %}

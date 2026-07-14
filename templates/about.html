@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" alt="Foto Profil" width="150">
+<h1>{{ profile.name }}</h1>
+<h3>{{ profile.headline }}</h3>
+<p>{{ profile.about }}</p>
+
+<h3>Skill / Keahlian</h3>
+<ul>
+    {% for skill in skills %}
+    <li>{{ skill.name }}</li>
+    {% else %}
+    <li>Belum ada skill ditambahkan.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

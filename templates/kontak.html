@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Kontak{% endblock %}
+
+{% block content %}
+<h1>Hubungi Saya</h1>
+
+<form method="POST">
+    <label for="name">Nama:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="message">Pesan:</label><br>
+    <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+    <button type="submit">Kirim Pesan</button>
+</form>
+
+<hr>
+
+<h3>Informasi Kontak</h3>
+<p>Email: {{ profile.email if profile else '-' }}</p>
+<p>GitHub: <a href="{{ profile.github }}" target="_blank">{{ profile.github if profile else '-' }}</a></p>
+<p>LinkedIn: <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin if profile else '-' }}</a></p>
+{% endblock %}

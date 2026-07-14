@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Portofolio{% endblock %}
+
+{% block content %}
+<h1>Portofolio Saya</h1>
+<div class="portfolio-grid">
+    {% for project in projects %}
+    <div class="project-card">
+        <img src="{{ url_for('static', filename='uploads/' + project.image_file) }}" alt="{{ project.title }}" width="150">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description[:100] }}...</p>
+        <div>
+            {% for tech in project.technologies.split(',') %}
+            <span>{{ tech.strip() }}</span>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('project_detail', id=project.id) }}">Lihat Detail</a>
+    </div>
+    {% else %}
+    <p>Belum ada proyek. Tambahkan dari dashboard.</p>
+    {% endfor %}
+</div>
+{% endblock %}
