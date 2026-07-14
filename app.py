@@ -186,6 +186,57 @@ def delete_message(id):
 
     return redirect(url_for('dashboard_messages'))
 
+@app.route('/dashboard/profile', methods=['GET', 'POST'])
+def dashboard_profile():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    profile = Profile.query.first()
+    skills = Skill.query.all()
+
+    if request.method == 'POST':
+        profile.name = request.form.get('name')
+        profile.headline = request.form.get('headline')
+        profile.about = request.form.get('about')
+        profile.email = request.form.get('email')
+        profile.github = request.form.get('github')
+        profile.linkedin = request.form.get('linkedin')
+
+        file = request.files.get('photo')
+        if file and file.filename != '' and allowed_file(file.filename):
+            image_filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_filename))
+            profile.photo = image_filename
+
+        db.session.commit()
+        return redirect(url_for('dashboard_profile'))
+
+    return render_template('dashboard/profile.html', profile=profile, skills=skills)
+
+@app.route('/dashboard/profile/skill/add', methods=['POST'])
+def add_skill():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    skill_name = request.form.get('skill_name')
+    if skill_name:
+        new_skill = Skill(name=skill_name)
+        db.session.add(new_skill)
+        db.session.commit()
+
+    return redirect(url_for('dashboard_profile'))
+
+@app.route('/dashboard/profile/skill/delete/<int:id>', methods=['POST'])
+def delete_skill(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    skill = Skill.query.get_or_404(id)
+    db.session.delete(skill)
+    db.session.commit()
+
+    return redirect(url_for('dashboard_profile'))
+
 @app.route('/dashboard/logout')
 def logout():
     session.pop('user', None)

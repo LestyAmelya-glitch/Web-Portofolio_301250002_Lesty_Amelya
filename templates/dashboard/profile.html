@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kelola Profil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Kelola Profil</h1>
+    <p><a href="{{ url_for('dashboard_index') }}">← Kembali ke Dashboard</a></p>
+
+    <h3>Data Profil</h3>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="name">Nama:</label><br>
+        <input type="text" id="name" name="name" value="{{ profile.name }}" required><br><br>
+
+        <label for="headline">Headline:</label><br>
+        <input type="text" id="headline" name="headline" value="{{ profile.headline }}"><br><br>
+
+        <label for="about">About:</label><br>
+        <textarea id="about" name="about" rows="4">{{ profile.about }}</textarea><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="{{ profile.email }}"><br><br>
+
+        <label for="github">Link GitHub:</label><br>
+        <input type="url" id="github" name="github" value="{{ profile.github }}"><br><br>
+
+        <label for="linkedin">Link LinkedIn:</label><br>
+        <input type="url" id="linkedin" name="linkedin" value="{{ profile.linkedin }}"><br><br>
+
+        <p>Foto saat ini:</p>
+        <img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" alt="Foto Profil" width="150"><br><br>
+
+        <label for="photo">Ganti Foto (kosongkan jika tidak ingin mengubah):</label><br>
+        <input type="file" id="photo" name="photo" accept=".png,.jpg,.jpeg,.gif,.webp"><br><br>
+
+        <button type="submit">Simpan Perubahan</button>
+    </form>
+
+    <hr>
+
+    <h3>Kelola Skill</h3>
+    <ul>
+        {% for skill in skills %}
+        <li>
+            {{ skill.name }}
+            <form action="{{ url_for('delete_skill', id=skill.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus skill ini?');">
+                <button type="submit">Hapus</button>
+            </form>
+        </li>
+        {% else %}
+        <li>Belum ada skill.</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('add_skill') }}" method="POST">
+        <input type="text" name="skill_name" placeholder="Nama skill baru" required>
+        <button type="submit">Tambah Skill</button>
+    </form>
+</body>
+</html>
