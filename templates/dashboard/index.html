@@ -6,8 +6,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Selamat datang di Dashboard</h1>
-    <p>Kamu berhasil login!</p>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <h1>Dashboard Admin</h1>
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+
+    <hr>
+
+    <h3>Ringkasan</h3>
+    <p>Total Proyek: {{ total_projects }}</p>
+    <p>Pesan Belum Dibaca: {{ unread_messages }}</p>
+
+    <hr>
+
+    <h3>Menu</h3>
+    <ul>
+        <li><a href="#">Kelola Proyek</a></li>
+        <li><a href="#">Kotak Masuk Pesan</a></li>
+        <li><a href="#">Kelola Profil</a></li>
+    </ul>
 </body>
 </html>
