@@ -145,6 +145,17 @@ def edit_project(id):
 
     return render_template('dashboard/edit_project.html', project=project)
 
+@app.route('/dashboard/projects/delete/<int:id>', methods=['POST'])
+def delete_project(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
+
+    project = Project.query.get_or_404(id)
+    db.session.delete(project)
+    db.session.commit()
+
+    return redirect(url_for('dashboard_projects'))
+
 @app.route('/dashboard/logout')
 def logout():
     session.pop('user', None)
