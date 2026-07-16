@@ -3,23 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Portofolio Saya{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/portofolio">Portofolio</a>
-        <a href="/kontak">Kontak</a>
-    </nav>
+<body style="background-image: linear-gradient(rgba(232, 226, 206, 0.85), rgba(232, 226, 206, 0.85)), url('{{ url_for('static', filename='icons/background.png') }}'); background-repeat: repeat; background-size: 300px;">
+    <div class="browser-frame">
+        <div class="titlebar">
+            <div class="titlebar-text">🍎 https://portofolio-saya.my.id</div>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+        <div class="addressbar">
+            <span class="arrow">←</span>
+            <span class="arrow">→</span>
+            <span class="arrow">⟳</span>
+            <div class="address-text">portofolio-saya.my.id</div>
+            <img src="{{ url_for('static', filename='icons/navigation.png') }}" class="nav-decor" alt="">
+        </div>
 
-    <footer>
-        <p>&copy; 2026 - Portofolio Saya</p>
-    </footer>
+        <div class="tabbar">
+            <a class="tab" href="/"><img src="{{ url_for('static', filename='icons/home.png') }}" alt="">Home</a>
+            <a class="tab" href="/about"><img src="{{ url_for('static', filename='icons/about.png') }}" alt="">About</a>
+            <a class="tab" href="/portofolio"><img src="{{ url_for('static', filename='icons/portofolio.png') }}" alt="">Portofolio</a>
+            <a class="tab" href="/kontak"><img src="{{ url_for('static', filename='icons/kontak.png') }}" alt="">Kontak</a>
+        </div>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <div class="frame-footer">
+            <img src="{{ url_for('static', filename='icons/footer.png') }}" alt="">
+            <span>&copy; 2026 - Portofolio Saya</span>
+        </div>
+    </div>
 </body>
 </html>

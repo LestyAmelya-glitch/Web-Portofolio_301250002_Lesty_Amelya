@@ -3,10 +3,32 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" alt="Foto Profil" width="200">
-<h1>{{ profile.name }}</h1>
-<h3>{{ profile.headline }}</h3>
-<p>{{ profile.about }}</p>
-<a href="/portofolio">Lihat Portofolio</a>
-<a href="/kontak">Hubungi Saya</a>
+<div class="hero-grid">
+    <div class="intro-card">
+        <h2 class="name-tag">{{ profile.name }} <span class="mood">(＾▽＾)</span></h2>
+        <div class="info-badge">{{ profile.headline }}</div>
+        <p>{{ profile.about }}</p>
+        <a href="/portofolio" class="btn">Lihat Portofolio</a>
+    </div>
+
+    <div class="side-card">
+        <img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" class="profile-photo" alt="Foto Profil">
+
+        <div class="findme-header">Find Me Here! <img src="{{ url_for('static', filename='icons/apple.png') }}" class="findme-deco" alt=""></div>
+        <ul class="findme-list">
+            <li>
+                <img src="{{ url_for('static', filename='icons/github.png') }}" class="findme-icon" alt="GitHub">
+                <a href="{{ profile.github }}" target="_blank">GitHub</a>
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='icons/linkedin.png') }}" class="findme-icon" alt="LinkedIn">
+                <a href="{{ profile.linkedin }}" target="_blank">LinkedIn</a>
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='icons/email.png') }}" class="findme-icon" alt="Email">
+                <a href="mailto:{{ profile.email }}">Email</a>
+            </li>
+        </ul>
+    </div>
+</div>
 {% endblock %}
