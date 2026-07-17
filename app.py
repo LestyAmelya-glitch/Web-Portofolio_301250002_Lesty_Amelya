@@ -4,10 +4,10 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-app.config['ADMIN_USERNAME'] = 'admin'
-app.config['ADMIN_PASSWORD'] = 'admin123'
+app.config['ADMIN_USERNAME'] = 'Lesty'
+app.config['ADMIN_PASSWORD'] = 'Lestya008'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
-app.config['SECRET_KEY'] = 'kunci-rahasia-anda-ganti-nanti'
+app.config['SECRET_KEY'] = 'fc60cf590cd02135807bedfca6aabb00'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5 MB
 
@@ -242,7 +242,8 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
 
+with app.app_context():
+    db.create_all()
+
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)

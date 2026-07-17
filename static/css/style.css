@@ -155,6 +155,7 @@ main h1 {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     gap: 24px;
+    align-items: start;
 }
 
 .intro-card {
@@ -415,4 +416,57 @@ td {
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.skill-tag {
+    background-color: #7CB86C;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    border-radius: 20px;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.about-story {
+    background-color: #FFF6F0;
+    border: 3px dashed #C0453F;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.about-section {
+    background-color: #FFFDF7;
+    border: 2px dashed #E3D5B8;
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+
+.fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.fact-card {
+    background-color: #F3E9D2;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-weight: 600;
+    color: #6B5A2F;
+    text-align: center;
 }

@@ -3,17 +3,35 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
-<img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" alt="Foto Profil" width="150">
-<h1>{{ profile.name }}</h1>
-<h3>{{ profile.headline }}</h3>
-<p>{{ profile.about }}</p>
+<h1><img src="{{ url_for('static', filename='icons/about.png') }}" class="heading-icon" alt=""> Tentang Saya</h1>
 
-<h3>Skill / Keahlian</h3>
-<ul>
-    {% for skill in skills %}
-    <li>{{ skill.name }}</li>
-    {% else %}
-    <li>Belum ada skill ditambahkan.</li>
-    {% endfor %}
-</ul>
+<div class="about-header">
+    <img src="{{ url_for('static', filename='uploads/' + profile.photo) }}" class="profile-photo" alt="Foto Profil">
+    <h2 class="name-tag">{{ profile.name }}</h2>
+    <div class="info-badge">{{ profile.headline }}</div>
+</div>
+
+<div class="about-story">
+    <p>{{ profile.about }}</p>
+</div>
+
+<div class="about-section">
+    <h3><img src="{{ url_for('static', filename='icons/tomat.png') }}" class="heading-icon" alt=""> Skill / Keahlian</h3>
+    <div class="skill-tags">
+        {% for skill in skills %}
+        <span class="skill-tag">{{ skill.name }}</span>
+        {% else %}
+        <span class="skill-tag">Belum ada skill ditambahkan.</span>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="about-section">
+    <h3><img src="{{ url_for('static', filename='icons/apple.png') }}" class="heading-icon" alt=""> Fun Facts</h3>
+    <div class="fact-grid">
+        <div class="fact-card">hobi gambar dari zaman SD,sekarang ganti ke media digital</div>
+        <div class="fact-card">hobi berkebun sayuran , i have my own mini garden, selada, pakcoy, tomat, kemangi n tomatoo</div>
+        <div class="fact-card">animal lovers</div>
+    </div>
+</div>
 {% endblock %}
