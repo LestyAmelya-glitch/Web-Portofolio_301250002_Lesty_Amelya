@@ -28,10 +28,10 @@
     <h3><img src="{{ url_for('static', filename='icons/kontak.png') }}" class="heading-icon" alt=""> Info Kontak</h3>
     <ul class="findme-list">
         <li>
-            <img src="{{ url_for('static', filename='icons/email.png') }}" class="findme-icon" alt="Email">
-            <span>{{ profile.email if profile else '-' }}</span>
-        </li>
-        <li>
+    <img src="{{ url_for('static', filename='icons/email.png') }}" class="findme-icon" alt="Email">
+    <a href="mailto:{{ profile.email }}">{{ profile.email if profile else '-' }}</a
+    </li>       
+     <li>
             <img src="{{ url_for('static', filename='icons/github.png') }}" class="findme-icon" alt="GitHub">
             <a href="{{ profile.github }}" target="_blank">{{ profile.github if profile else '-' }}</a>
         </li>

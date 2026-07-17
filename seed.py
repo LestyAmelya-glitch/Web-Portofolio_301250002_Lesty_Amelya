@@ -4,7 +4,7 @@ from models import Profile, Skill, Project
 with app.app_context():
     profile = Profile(
         name="Lesty Amelya",
-        headline="Mahasiswa Informatika | Web Developer",
+        headline="Mahasiswa Informatika | Web Designer",
         about="Saya mahasiswa yang sedang belajar membangun aplikasi web dengan Python dan Flask.",
         photo="profil.jpg",
         email="emailkamu@gmail.com",
