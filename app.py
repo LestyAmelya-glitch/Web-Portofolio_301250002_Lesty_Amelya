@@ -4,13 +4,10 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-app.config['ADMIN_USERNAME'] = 'Lesty'
-app.config['ADMIN_PASSWORD'] = 'Lestya008'
+app.config['ADMIN_USERNAME'] = os.environ.get('ADMIN_USERNAME', 'Lesty')
+app.config['ADMIN_PASSWORD'] = os.environ.get('ADMIN_PASSWORD', 'Lestya008')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
-app.config['SECRET_KEY'] = 'fc60cf590cd02135807bedfca6aabb00'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5 MB
-
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fc60cf590cd02135807bedfca6aabb00')
 db.init_app(app)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
