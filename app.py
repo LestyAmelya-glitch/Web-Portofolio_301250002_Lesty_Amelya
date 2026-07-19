@@ -8,6 +8,7 @@ app.config['ADMIN_USERNAME'] = os.environ.get('ADMIN_USERNAME', 'Lesty')
 app.config['ADMIN_PASSWORD'] = os.environ.get('ADMIN_PASSWORD', 'Lestya008')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fc60cf590cd02135807bedfca6aabb00')
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 db.init_app(app)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}

@@ -3,6 +3,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
@@ -13,6 +14,7 @@ class Project(db.Model):
     live_link = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -20,6 +22,7 @@ class Message(db.Model):
     message = db.Column(db.Text, nullable=False)
     is_read = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,6 +33,7 @@ class Profile(db.Model):
     email = db.Column(db.String(120))
     github = db.Column(db.String(200))
     linkedin = db.Column(db.String(200))
+
 
 class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
