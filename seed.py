@@ -5,18 +5,23 @@ with app.app_context():
     profile = Profile(
         name="Lesty Amelya",
         headline="Mahasiswa Informatika | Web Designer",
-        about="Saya mahasiswa yang sedang belajar membangun aplikasi web dengan Python dan Flask.",
+        about="Hi, I'm Lesty! Mahasiswa Teknik Informatika asal Bandung yang jatuh cinta sama coding dan desain." \
+        " Aktif explore web development, mobile apps dengan Flutter, dan project Python — " \
+        "dengan passion utama di UI/UX design yang clean tapi tetap playful. " \
+        "Di luar coding, aku suka menggambar, berkebun, dan selalu penasaran belajar hal baru (sekarang lagi eksplor AI!)." \
+        " Website ini adalah cerminan diriku: teknologi yang fungsional dan menyenangkan, dengan sentuhan lucuu di setiap detailnya.",
         photo="profil.jpg",
-        email="emailkamu@gmail.com",
-        github="https://github.com/username-kamu",
-        linkedin="https://linkedin.com/in/username-kamu"
+        email="lestyamelya008@gmail.com",
+        github="https://github.com/LestyAmelya-glitch",
+        linkedin="https://www.linkedin.com/in/lesty-amelya-ba08b8422/"
     )
     db.session.add(profile)
 
     skill1 = Skill(name="Python")
     skill2 = Skill(name="Flask")
     skill3 = Skill(name="HTML/CSS")
-    db.session.add_all([skill1, skill2, skill3])
+    skill4 = Skill(name="menggambar(Tadisional/Digital)")
+    db.session.add_all([skill1, skill2, skill3, skill4])
 
     project1 = Project(
         title="Website Toko Online Sederhana",
